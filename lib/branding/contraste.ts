@@ -5,11 +5,10 @@
  * Os três, e por que cada um é independente:
  *
  *  (a) **Contraste vertical, por PAPEL × SUPERFÍCIE.** Checar só o stop da semente é
- *      um gate que nasce verde e mente. Medido na Sage: `accent-600` contra `--color-bg`
- *      dá 5,51 — mas o anel de foco usa `accent-500` (`globals.css`, `:focus-visible`) e
- *      dá 3,79 contra bg e 3,60 contra `surface-elevated`. Com a semente pousada num
- *      piso de 3,0, o anel pousaria em ~2,07 e o gate continuaria verde. Por isso os
- *      pares saem EXTRAÍDOS do `globals.css` (`extrairRegua`), nunca listados à mão:
+ *      um gate que nasce verde e mente. Na paleta !AI atual, o Cobalt 600 mede 4,56
+ *      contra o Bone. O foco também usa o Cobalt 600 para preservar essa margem. Por isso os pares
+ *      saem EXTRAÍDOS do `globals.css`
+ *      (`extrairRegua`), nunca listados à mão:
  *      lista à mão só pega quem foi inscrito.
  *
  *  (b) **Separação de matiz por ΔE sob dicromacia, não por ângulo.** A régua de ângulo
@@ -315,10 +314,11 @@ export function extrairRegua(css: string): Regua {
   const regras = varrerRegras(css);
   const raiz = regras.find((r) => r.seletor === ":root");
   const escuro = regras.find(
-    (r) => r.seletor.includes('[data-theme="dark"]') && r.decls.some((d) => d.prop === "--color-bg"),
+    (r) =>
+      r.seletor.includes('[data-theme="dark"]') && r.decls.some((d) => d.prop === "--color-bg"),
   );
   if (!raiz || !escuro) {
-    throw new Error("régua: não achei os blocos :root e [data-theme=\"dark\"] no CSS");
+    throw new Error('régua: não achei os blocos :root e [data-theme="dark"] no CSS');
   }
 
   const rampaDoProduto = lerRampa(raiz.decls);
@@ -462,7 +462,11 @@ function montarTema(
 
 // ── Resolução de fontes sob um deslocamento ─────────────────────────────────
 
-function resolverFonte(fonte: Fonte, rampa: Rampa, deslocamento: number): { hex: string; alfa: number } {
+function resolverFonte(
+  fonte: Fonte,
+  rampa: Rampa,
+  deslocamento: number,
+): { hex: string; alfa: number } {
   if (fonte.tipo === "grau") {
     return { hex: stop(rampa, fonte.indice + deslocamento), alfa: fonte.alfa };
   }
@@ -488,10 +492,11 @@ export function superficiesDoTema(
     // Fonte literal numa tingida = o token não referencia a rampa (o caso do escuro).
     // Reancoramos no stop que o tema pinta como accent: é o que faz a marca do cliente
     // chegar ao chip em vez de o verde do produto ficar lá para sempre.
-    const tinta =
-      t.fonte.tipo === "grau" ? hex : stop(rampa, tema.indices.accent + deslocamento);
+    const tinta = t.fonte.tipo === "grau" ? hex : stop(rampa, tema.indices.accent + deslocamento);
     if (alfa >= 1) saida.push({ chave: t.chave, hex: tinta });
-    else for (const b of tema.base) saida.push({ chave: `${t.chave}@${b.chave}`, hex: compor(tinta, alfa, b.hex) });
+    else
+      for (const b of tema.base)
+        saida.push({ chave: `${t.chave}@${b.chave}`, hex: compor(tinta, alfa, b.hex) });
   }
   return saida;
 }
@@ -506,11 +511,7 @@ export type ParMedido = {
 };
 
 /** Mede TODOS os pares (papel × superfície) do tema sob um deslocamento. */
-export function medirPares(
-  tema: TemaDaRegua,
-  rampa: Rampa,
-  deslocamento: number,
-): ParMedido[] {
+export function medirPares(tema: TemaDaRegua, rampa: Rampa, deslocamento: number): ParMedido[] {
   const superficies = superficiesDoTema(tema, rampa, deslocamento);
   const pares: ParMedido[] = [];
   for (const papel of tema.papeis) {
@@ -566,11 +567,7 @@ export type EscolhaDeAccent = {
  * deslocamento e DIZER que ele não fecha, não lançar exceção numa função que roda no
  * caminho de render do `app/layout.tsx`.
  */
-export function escolherAccent(
-  rampa: Rampa,
-  tema: TemaDaRegua,
-  alcance = 10,
-): EscolhaDeAccent {
+export function escolherAccent(rampa: Rampa, tema: TemaDaRegua, alcance = 10): EscolhaDeAccent {
   const sentidoUtil = tema.nome === "claro" ? 1 : -1;
   const candidatos: number[] = [0];
   for (let d = 1; d <= alcance; d += 1) candidatos.push(d * sentidoUtil, -d * sentidoUtil);
@@ -673,7 +670,11 @@ export function reconciliarSemanticas(
       });
 
     let achou: { cor: string; rotacao: number; separacao: number } | null = null;
-    for (let passo = PASSO_DE_ROTACAO; passo <= ROTACAO_MAXIMA && !achou; passo += PASSO_DE_ROTACAO) {
+    for (
+      let passo = PASSO_DE_ROTACAO;
+      passo <= ROTACAO_MAXIMA && !achou;
+      passo += PASSO_DE_ROTACAO
+    ) {
       for (const sinal of [1, -1] as const) {
         const candidata = girar(hex, sinal * passo);
         const separacao = deltaESimulado(candidata, accent);

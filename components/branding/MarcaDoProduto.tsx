@@ -8,9 +8,9 @@ type Props = {
   readonly decorativo?: boolean;
 };
 
-const SIMBOLO_CLARO_ESCURO = "fill-[#6d28d9] dark:fill-[#a78bfa]";
-const NOME_CLARO_ESCURO = "fill-[#111111] dark:fill-[#f5f5f5]";
-const SUFIXO_CLARO_ESCURO = "fill-[#2563eb] dark:fill-[#b6ff4d]";
+const SIMBOLO_CLARO_ESCURO = "fill-[#f5f3ed] dark:fill-[#f5f3ed]";
+const NOME_CLARO_ESCURO = "fill-[#0a0a0b] dark:fill-[#f5f3ed]";
+const SUFIXO_CLARO_ESCURO = "fill-[#3f5bff] dark:fill-[#d8ff3e]";
 
 export const CLASSES_DE_COR = {
   simbolo: SIMBOLO_CLARO_ESCURO,
@@ -19,38 +19,84 @@ export const CLASSES_DE_COR = {
 } as const;
 
 function acessibilidade(nome: string, decorativo: boolean) {
-  return decorativo ? ({ "aria-hidden": true } as const) : ({ role: "img", "aria-label": nome } as const);
+  return decorativo
+    ? ({ "aria-hidden": true } as const)
+    : ({ role: "img", "aria-label": nome } as const);
+}
+
+function SimboloGeometrico() {
+  return (
+    <>
+      <rect width="216" height="216" rx="42" className="fill-[#0a0a0b]" />
+      <rect {...SIMBOLO.exclamacao} className="fill-[#d8ff3e]" />
+      <circle {...SIMBOLO.ponto} className="fill-[#d8ff3e]" />
+      <path className={SIMBOLO_CLARO_ESCURO} d={SIMBOLO.d} />
+      <path d={SIMBOLO.vazioDoA} className="fill-[#0a0a0b]" />
+      <path d={SIMBOLO.triangulo} className="fill-[#3f5bff]" />
+      <rect {...SIMBOLO.i} className={SIMBOLO_CLARO_ESCURO} />
+    </>
+  );
 }
 
 export function SimboloDoProduto({ nome, className, decorativo = false }: Props) {
   return (
-    <svg viewBox={SIMBOLO.viewBox} className={cn("shrink-0", className)} {...acessibilidade(nome, decorativo)}>
-      <rect width="216" height="216" rx="48" className="fill-[#080808]" />
-      <path className={SIMBOLO_CLARO_ESCURO} d={SIMBOLO.d} />
-      <text x="108" y="128" textAnchor="middle" className="fill-[#f5f5f5]" style={{ font: "700 58px var(--font-atkinson), system-ui, sans-serif" }}>
-        !AI
-      </text>
-      <rect {...SIMBOLO.modulo} className={SUFIXO_CLARO_ESCURO} />
+    <svg
+      viewBox={SIMBOLO.viewBox}
+      className={cn("shrink-0", className)}
+      {...acessibilidade(nome, decorativo)}
+    >
+      <SimboloGeometrico />
     </svg>
   );
 }
 
 export function LogotipoDoProduto({ nome, className, decorativo = false }: Props) {
   return (
-    <svg viewBox={LOGOTIPO.viewBox} className={cn("shrink-0", className)} {...acessibilidade(nome, decorativo)}>
+    <svg
+      viewBox={LOGOTIPO.viewBox}
+      className={cn("shrink-0", className)}
+      {...acessibilidade(nome, decorativo)}
+    >
       <g transform={LOGOTIPO.simbolo.transform}>
-        <rect width="216" height="216" rx="48" className="fill-[#080808]" />
-        <path className={SIMBOLO_CLARO_ESCURO} d={SIMBOLO.d} />
-        <text x="108" y="128" textAnchor="middle" className="fill-[#f5f5f5]" style={{ font: "700 58px var(--font-atkinson), system-ui, sans-serif" }}>
-          !AI
-        </text>
-        <rect {...LOGOTIPO.simbolo.modulo} className={SUFIXO_CLARO_ESCURO} />
+        <SimboloGeometrico />
       </g>
-      <text x="252" y="104" className={NOME_CLARO_ESCURO} style={{ font: "700 54px var(--font-atkinson), system-ui, sans-serif" }}>
+      <line
+        x1="250"
+        y1="28"
+        x2="250"
+        y2="188"
+        className="stroke-[#0a0a0b] dark:stroke-[#f5f3ed]"
+        strokeWidth="2"
+      />
+      <text
+        x="286"
+        y="85"
+        className={NOME_CLARO_ESCURO}
+        style={{
+          font: "700 48px var(--font-atkinson), system-ui, sans-serif",
+          letterSpacing: "-2px",
+        }}
+      >
         I Can't Believe
       </text>
-      <text x="254" y="158" className={SUFIXO_CLARO_ESCURO} style={{ font: "500 38px var(--font-mono), ui-monospace, monospace" }}>
-        CRM
+      <text
+        x="286"
+        y="139"
+        className={NOME_CLARO_ESCURO}
+        style={{
+          font: "700 48px var(--font-atkinson), system-ui, sans-serif",
+          letterSpacing: "-2px",
+        }}
+      >
+        CRM <tspan className={SUFIXO_CLARO_ESCURO}>!AI</tspan>
+      </text>
+      <text
+        x="289"
+        y="174"
+        className="fill-[#4b4b4f] dark:fill-[#b7b4ad]"
+        style={{ font: "500 15px var(--font-mono), ui-monospace, monospace", letterSpacing: "4px" }}
+      >
+        TECNOLOGIA PARA NEGÓCIOS
       </text>
     </svg>
   );

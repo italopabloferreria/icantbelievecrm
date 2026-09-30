@@ -32,8 +32,16 @@ import "./globals.css";
 // então use sempre a custom property (--font-atkinson), nunca o nome da fonte.
 const atkinson = localFont({
   src: [
-    { path: "./fonts/atkinson-hyperlegible-400-latin-latin-ext.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/atkinson-hyperlegible-700-latin-latin-ext.woff2", weight: "700", style: "normal" },
+    {
+      path: "./fonts/atkinson-hyperlegible-400-latin-latin-ext.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/atkinson-hyperlegible-700-latin-latin-ext.woff2",
+      weight: "700",
+      style: "normal",
+    },
   ],
   display: "swap",
   variable: "--font-atkinson",
@@ -90,6 +98,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "CRM self-hosted da !AI para atendimento, vendas e automação com agentes de IA, WhatsApp, multi-tenant e LGPD nativa.";
   return {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
       default: title,
       template: `%s · ${name}`,
@@ -105,11 +114,20 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: name,
       title,
       description,
+      images: [
+        {
+          url: "/brand/ai-hero.jpg",
+          width: 1536,
+          height: 768,
+          alt: "I Can't Believe It's AI — tecnologia para negócios",
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: ["/brand/ai-hero.jpg"],
     },
     // Sem esta linha o navegador pede `/favicon.ico`, que não existe: medido em
     // produção, o 404 é a `app/not-found.tsx` INTEIRA (19.435 bytes de HTML)

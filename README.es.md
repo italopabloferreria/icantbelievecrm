@@ -4,6 +4,8 @@ CRM autohospedado de **!AI (I Can't Believe It's AI)** para atención, ventas y 
 
 ![I Can't Believe CRM](docs/brand/ai-logo-dark.svg)
 
+![Identidad visual de !AI](public/brand/ai-hero.jpg)
+
 ## Qué es
 
 I Can't Believe CRM es el producto CRM propio de !AI. Conserva la base open source: CRM multi-tenant, WhatsApp como canal principal, agentes de IA, Supabase, privacidad, auditoría e instalación autohospedada.
@@ -39,17 +41,19 @@ Usa los archivos `docker-compose*.yml` como base para entornos locales y de prod
 - `supabase/`: esquema, migraciones y baseline
 - `docs/`: documentación técnica y operativa
 
+## Identidad visual
+
+El producto usa la paleta oficial de !AI: Carbon `#0A0A0B`, Bone `#F5F3ED`, Acid Lime `#D8FF3E` y Cobalt `#3F5BFF`. La guía y los recursos vectoriales están en [`docs/brand`](docs/brand/README.md).
+
 ## Roadmap
 
-- Finalizar la identidad visual oficial de !AI
 - Publicar imágenes Docker propias
-- Renombrar el repositorio de GitHub a `icantbelievecrm`
 - Completar el rebranding !AI de la documentación operativa de VPS
 - Añadir funciones específicas de !AI sin romper la compatibilidad con la base open source
 
 ## Capturas de pantalla
 
-Las capturas finales se añadirán después de validar visualmente el producto con la marca !AI.
+La referencia visual oficial está en [`public/brand/ai-brand-board.jpg`](public/brand/ai-brand-board.jpg). Las capturas del producto se actualizarán a medida que se validen las pantallas.
 
 ## Contribución
 

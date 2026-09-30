@@ -1,13 +1,32 @@
-# Marca !AI
+# Identidade visual !AI
 
-Assets placeholder para o fork I Can't Believe CRM.
+Sistema visual oficial do **I Can't Believe CRM**, baseado nas referências fornecidas pela !AI.
 
-| Arquivo | O que é |
-|---|---|
-| `ai-icon.svg` | Símbolo minimalista com `!AI`. |
-| `ai-logo.svg` | Logotipo claro do I Can't Believe CRM. |
-| `ai-logo-dark.svg` | Logotipo escuro do I Can't Believe CRM. |
+## Assets
 
-Estes SVGs continuam fora de `public/` para preservar a arquitetura white-label: o app desenha a marca padrão em runtime e usa a marca configurada pela instalação quando existir.
+| Arquivo                                 | Uso                                                   |
+| --------------------------------------- | ----------------------------------------------------- |
+| `ai-icon.svg`                           | Símbolo `!AI` para ícone, avatar e espaços compactos. |
+| `ai-logo.svg`                           | Assinatura institucional sobre fundo Bone.            |
+| `ai-logo-dark.svg`                      | Assinatura do CRM sobre fundo Carbon.                 |
+| `../../public/brand/ai-hero.jpg`        | Imagem principal e cartão social do produto.          |
+| `../../public/brand/ai-brand-board.jpg` | Brand board de referência.                            |
 
-Paleta base: `#080808`, `#111111`, `#1B1B1B`; texto `#F5F5F5`; roxo e azul como principais; `#B6FF4D` como accent lime.
+O aplicativo mantém a marca em SVG inline para preservar o white-label: a identidade !AI aparece quando a instalação usa a marca padrão; marcas configuradas pelo operador continuam prevalecendo.
+
+## Paleta oficial
+
+| Token     | Hex       | Função                                                 |
+| --------- | --------- | ------------------------------------------------------ |
+| Carbon    | `#0A0A0B` | Fundos escuros, texto principal e símbolo.             |
+| Bone      | `#F5F3ED` | Fundo claro, texto sobre Carbon e áreas editoriais.    |
+| Acid Lime | `#D8FF3E` | Destaque enérgico e assinatura do ponto de exclamação. |
+| Cobalt    | `#3F5BFF` | Ações principais, links e o triângulo do `A`.          |
+
+## Direção visual
+
+- Tipografia forte, compacta e de alto contraste.
+- Superfícies editoriais em Bone ou Carbon, com linhas finas e poucos efeitos.
+- Cobalt orienta interação; Acid Lime marca momentos de destaque.
+- O símbolo nunca deve ter suas quatro cores trocadas ou receber efeitos de gradiente.
+- A frase institucional é **“Tecnologia para negócios.”**
