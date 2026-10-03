@@ -59,7 +59,7 @@ A referência visual oficial está em [`public/brand/ai-brand-board.jpg`](public
 
 Use branches pequenas, preserve regras de negócio existentes e rode validações de lint, tipos, testes e build antes de enviar mudanças.
 
-## Based on the amazing work from DeskcommCRM.
+## Based on the excepcional work from DeskcommCRM Created By Rafael Melgaço. Baseado no trabalho Sublime e Excepcional do DeskcommCRM Creado pelo Rafael Melgaço.
 
 Este projeto é baseado no trabalho original de [DeskcommCRM](https://github.com/melgarafael/DeskcommCRM), distribuído sob licença MIT. O aviso de copyright e a licença original foram preservados em `LICENSE`.
 
