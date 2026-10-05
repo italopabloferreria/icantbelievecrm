@@ -1,0 +1,6 @@
+interface:
+  display_name: "Operar o I Can't Believe CRM"
+  short_description: "Consulta código, docs, skills e tutoriais para configurar, operar e diagnosticar o CRM da !AI"
+  default_prompt: "Use a skill icb-crm-operacao e me ajude a configurar ou operar o I Can't Believe CRM usando o estado atual do projeto."
+policy:
+  allow_implicit_invocation: true
